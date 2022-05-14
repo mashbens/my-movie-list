@@ -1,0 +1,233 @@
+basePath: /v2
+definitions:
+  response.Response:
+    properties:
+      data: {}
+      errors: {}
+      message:
+        type: string
+      status:
+        type: boolean
+    type: object
+host: petstore.swagger.io
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: Brikut API yang digunakan untuk memanage movie data
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Swagger Movie API
+  version: "1.0"
+paths:
+  /api/v1/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Login user
+      parameters:
+      - description: Email
+        in: body
+        name: email
+        required: true
+        schema:
+          type: string
+      - description: Password
+        in: body
+        name: password
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Login
+      tags:
+      - auth
+  /api/v1/auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register user
+      parameters:
+      - description: Name
+        in: body
+        name: Name
+        required: true
+        schema:
+          type: string
+      - description: Email
+        in: body
+        name: email
+        required: true
+        schema:
+          type: string
+      - description: Password
+        in: body
+        name: password
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Register
+      tags:
+      - auth
+  /api/v1/movie/add:
+    post:
+      consumes:
+      - application/json
+      description: 'Add movie to watchlist, Header[Authorization]: Token'
+      parameters:
+      - description: Movie ID
+        in: body
+        name: ID
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Add movie to watchlist
+      tags:
+      - movie
+  /api/v1/movie/all:
+    get:
+      consumes:
+      - application/json
+      description: 'Get all user movies(watchlist),  Header[Authorization]: Token'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Get all user movies
+      tags:
+      - movie
+  /api/v1/movie/mylist/:id:
+    delete:
+      consumes:
+      - application/json
+      description: |-
+        Delete movie from watchlist, Header[Authorization]: Token
+        Example: /api/v1/movie/mylist/1
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Delete movie from watchlist
+      tags:
+      - movie
+    get:
+      consumes:
+      - application/json
+      description: |-
+        Find movie by ID From watchlist, Header[Authorization]: Token
+        Example: /api/v1/movie/mylist/1
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Find movie by ID From watchlist
+      tags:
+      - movie
+  /api/v1/movie/search:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Search movie, Header[Authorization]: Token, Param: movie name
+        Example: /api/v1/movie/search/avengers
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Search movie
+      tags:
+      - movie
+  /api/v1/user:
+    put:
+      consumes:
+      - application/json
+      description: 'Update user, Header[Authorization]: Token'
+      parameters:
+      - description: Name
+        in: body
+        name: Name
+        required: true
+        schema:
+          type: string
+      - description: Email
+        in: body
+        name: Email
+        required: true
+        schema:
+          type: string
+      - description: Password
+        in: body
+        name: Password
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Header:
+        - Authorization
+      summary: Update user
+      tags:
+      - user
+  /api/v1/user/profile:
+    get:
+      consumes:
+      - application/json
+      description: 'Get user profile, Header[Authorization]: Token'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Header:
+        - Authorization
+      summary: Get user profile
+      tags:
+      - user
+swagger: "2.0"

@@ -1,0 +1,6 @@
+[app]
+port = 8081
+
+[database]
+driver = "PostgreSQL"
+db_url = "host=localhost user=postgres password=arif1412 dbname=ref_mini port=5432 sslmode=disable TimeZone=Asia/Shanghai"
